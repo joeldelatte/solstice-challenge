@@ -12,7 +12,10 @@ if (process.env.NODE_ENV === "production") {
 
 
 // Add routes, both API and view
-app.use(routes);
+require("./routes/api/accounts-api-route")(app);
+require("./routes/api/customers-api-route")(app);
+
+
 
 
 
