@@ -1,7 +1,6 @@
- const accountsDataPath = "../../data/accounts.json"; 
-
- 
 const accountsRoutes = (app, fs) => {
+  // variables
+  const accountsDataPath = "./data/accounts.json";
 
   // READ
   app.get("/accounts", (req, res) => {
