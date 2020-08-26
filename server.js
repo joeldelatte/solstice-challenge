@@ -1,6 +1,7 @@
 const express = require("express");
+const router = require("express").Router();
 const app = express();
-const PORT = process.env.PORT || 3001;
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const fs = require("fs");
 
@@ -10,8 +11,15 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+router.use(function (req, res) {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -22,6 +30,7 @@ if (process.env.NODE_ENV === "production") {
 require("./routes/api/accounts-api-route")(app, fs);
 require("./routes/api/customers-api-route")(app, fs);
 
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
