@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const fs = require("fs");
+const PORT = process.env.PORT || 3001;
 
 var corsOptions = {
   origin: "http://localhost:3000",
@@ -30,7 +31,7 @@ if (process.env.NODE_ENV === "production") {
 require("./routes/api/accounts-api-route")(app, fs);
 require("./routes/api/customers-api-route")(app, fs);
 
-const PORT = process.env.PORT || 3001;
+
 app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });

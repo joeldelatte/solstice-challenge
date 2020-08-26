@@ -1,6 +1,6 @@
 const customersRoutes = (app, fs) => {
   // variables
-  const customersDataPath = "./data/accounts.json";
+  const customersDataPath = "./data/customers.json";
 
   // READ
   app.get("/customers", (req, res) => {
