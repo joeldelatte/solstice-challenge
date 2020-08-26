@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AllCustomers from './components/Main/AllCustomers';
 import AllAccounts from "./components/Main/AllAccounts";
+import { CustomerContext } from "../../utils/CustomerContext";
 // import Customer from "../src/components/Main/Customers/Customer"
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
 
   return (
     <>
+    <CustomerContext.Provider value={{globalCustomer, setGlobalCustomer}}>
       <div className="container">
         <div>
           <button onClick={()=>{setAccountsClicked(false)}}>View All Customers</button>
@@ -18,6 +20,7 @@ function App() {
         {(!accountsClicked && <div className="customerContainer"><AllCustomers /></div>)}
         {(accountsClicked && <div className="accountContainer"><AllAccounts /></div>)}
       </div>
+      </CustomerContext.Provider>
     </>
   );
 }

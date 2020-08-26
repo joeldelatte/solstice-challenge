@@ -1,11 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Customer from "./Customers/Customer"
-import http from "../../http-common";
+import http from "../../utils/http-common";
+import { CustomerContext } from "../../utils/CustomerContext";
 import "./main.css";
 
-const AllCustomers = (props) => {
+const AllCustomers = () => {
 
+  const [globalCustomer, setGlobalCustomer] = useContext(CustomerContext);
   const [customers, setCustomers] = useState([]);
+
+  //I need the customer data of the customer clicked on
+  function click(index) {
+    http.get("/customers")
+      .then(function (response) {
+        console.log(response.data.customers[index]);
+        setGlobalCustomer(response.data.customers[index]);
+      })
+      .catch(function (err) {
+        console.log(err);
+      })
+  }
 
   function getCustomers() {
     http.get("/customers")
@@ -23,11 +37,10 @@ const AllCustomers = (props) => {
   }, []);
 
     return (
+      <>
+      <h2>Customers</h2>
       <table className="customerTable">
         <thead>
-          <caption>
-            <h2>Customers</h2>
-          </caption>
           <tr>
             <th>First Name</th>
             <th>Last Name</th>
@@ -38,7 +51,7 @@ const AllCustomers = (props) => {
             return (
               <Customer
                 key={index}
-                // click={() => props.clicked(index)}
+                click={() => click(index)}
                 first_name={customer.first_name}
                 last_name={customer.last_name}
               />
@@ -46,6 +59,7 @@ const AllCustomers = (props) => {
           })}
         </tbody>
       </table>
+      </>
     );
 }
 
