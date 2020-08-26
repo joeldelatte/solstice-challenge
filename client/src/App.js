@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AllCustomers from './components/Main/AllCustomers';
 import AllAccounts from "./components/Main/AllAccounts";
 // import Customer from "../src/components/Main/Customers/Customer"
 
 function App() {
+
+  const [accountsClicked, setAccountsClicked] = useState(false);
+  // const [customersClicked, setCustomersClicked] = useState(false);
+
   return (
     <>
       <div className="container">
-        <div className="customerContainer">
-          <AllCustomers />
+        <div>
+          <button onClick={()=>{setAccountsClicked(false)}}>View All Customers</button>
+          <button onClick={()=>{setAccountsClicked(true)}}>View All Accounts</button>
         </div>
-        <div className="accountContainer">
-          <AllAccounts />
-        </div>
+        {(!accountsClicked && <div className="customerContainer"><AllCustomers /></div>)}
+        {(accountsClicked && <div className="accountContainer"><AllAccounts /></div>)}
       </div>
     </>
   );
@@ -20,4 +24,3 @@ function App() {
 
 export default App;
 
-//add button to conditionally render customers or accounts on main view
