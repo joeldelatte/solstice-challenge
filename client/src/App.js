@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
-import AllCustomers from './components/Main/AllCustomers';
-import AllAccounts from "./components/Main/AllAccounts";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import CustomerProfile from "../src/components/Dashboard/Profile/CustomerProfile"
+import MainPage from "./components/Main/MainPage"
 import { CustomerContext } from "./utils/CustomerContext";
 
 function App() {
 
-  const [globalCustomer, setGlobalCustomer] = useState({});
-  const [accountsClicked, setAccountsClicked] = useState(false);
+  const [globalCustomer, setGlobalCustomer] = useState(null);
 
   return (
     <>
-    <CustomerContext.Provider value={{globalCustomer, setGlobalCustomer}}>
-      <div className="container">
-        <div>
-          <button onClick={()=>{setAccountsClicked(false)}}>View All Customers</button>
-          <button onClick={()=>{setAccountsClicked(true)}}>View All Accounts</button>
-        </div>
-        {(!accountsClicked && <div className="customerContainer"><AllCustomers /></div>)}
-        {(accountsClicked && <div className="accountContainer"><AllAccounts /></div>)}
-      </div>
-      </CustomerContext.Provider>
+      <Router>
+        <CustomerContext.Provider value={{ globalCustomer, setGlobalCustomer }}>
+          <Switch>
+            <Route exact path="/">
+              <MainPage />
+            </Route>
+            <Route exact path="/profile">
+              <CustomerProfile />
+            </Route>
+          </Switch>
+        </CustomerContext.Provider>
+      </Router>
     </>
   );
 }

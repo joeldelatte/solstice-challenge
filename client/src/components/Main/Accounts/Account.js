@@ -1,5 +1,5 @@
 import React from "react";
-import "../../Main/main.css";
+import "../main.css";
 
 const Account = (props) => {
   return (

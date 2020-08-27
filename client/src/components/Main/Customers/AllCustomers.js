@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
-import Customer from "./Customers/Customer"
-import http from "../../utils/http-common";
-import { CustomerContext } from "../../utils/CustomerContext";
-import "./main.css";
+import Customer from "./Customer"
+import http from "../../../utils/http-common";
+import { CustomerContext } from "../../../utils/CustomerContext";
+import "../main.css";
 
 const AllCustomers = () => {
 
@@ -13,11 +13,8 @@ const AllCustomers = () => {
   function click(index) {
     http.get("/customers")
       .then(function (response) {
-        console.log(response.data.customers[index]);
+        // console.log(response.data.customers[index]);
         setGlobalCustomer(response.data.customers[index]);
-      })
-      .then(()=>{
-        console.log(globalCustomer);
       })
       .catch(function (err) {
         console.log(err);
@@ -27,7 +24,7 @@ const AllCustomers = () => {
   function getCustomers() {
     http.get("/customers")
       .then(function (response) {
-        console.log(response.data.customers);
+        // console.log(response.data.customers);
         setCustomers(response.data.customers);
       })
       .catch(function (err) {
@@ -37,7 +34,8 @@ const AllCustomers = () => {
 
   useEffect(()=>{
     getCustomers()
-  }, []);
+    console.log(globalCustomer);
+  }, [globalCustomer]);
 
     return (
       <>

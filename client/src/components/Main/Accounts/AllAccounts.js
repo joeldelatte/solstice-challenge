@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Account from "./Accounts/Account";
-import http from "../../utils/http-common";
-import "./main.css";
+import Account from "./Account";
+import http from "../../../utils/http-common";
+import "../main.css";
 
 const AllAccounts = (props) => {
   const [accounts, setAccounts] = useState([]);
