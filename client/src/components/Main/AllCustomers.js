@@ -6,7 +6,7 @@ import "./main.css";
 
 const AllCustomers = () => {
 
-  const [globalCustomer, setGlobalCustomer] = useContext(CustomerContext);
+  const { globalCustomer, setGlobalCustomer } = useContext(CustomerContext);
   const [customers, setCustomers] = useState([]);
 
   //I need the customer data of the customer clicked on
@@ -16,9 +16,12 @@ const AllCustomers = () => {
         console.log(response.data.customers[index]);
         setGlobalCustomer(response.data.customers[index]);
       })
+      .then(()=>{
+        console.log(globalCustomer);
+      })
       .catch(function (err) {
         console.log(err);
-      })
+      });
   }
 
   function getCustomers() {

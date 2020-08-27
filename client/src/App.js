@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import AllCustomers from './components/Main/AllCustomers';
 import AllAccounts from "./components/Main/AllAccounts";
-import { CustomerContext } from "../../utils/CustomerContext";
-// import Customer from "../src/components/Main/Customers/Customer"
+import { CustomerContext } from "./utils/CustomerContext";
 
 function App() {
 
+  const [globalCustomer, setGlobalCustomer] = useState({});
   const [accountsClicked, setAccountsClicked] = useState(false);
-  // const [customersClicked, setCustomersClicked] = useState(false);
 
   return (
     <>
