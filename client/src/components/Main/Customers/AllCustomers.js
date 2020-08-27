@@ -18,7 +18,7 @@ const AllCustomers = () => {
       })
       .catch(function (err) {
         console.log(err);
-      });
+      })
   }
 
   function getCustomers() {
@@ -34,8 +34,8 @@ const AllCustomers = () => {
 
   useEffect(()=>{
     getCustomers()
-    console.log(globalCustomer);
-  }, [globalCustomer]);
+    // console.log(globalCustomer);
+  }, []);
 
     return (
       <>

@@ -4,8 +4,11 @@ import { CustomerContext } from "../../../utils/CustomerContext";
 
 const CustomerProfile = () => {
 
-    const { globalCustomer, setGlobalCustomer } = useContext(CustomerContext);
+    const { globalCustomer } = useContext(CustomerContext);
 
+    useEffect(() => {
+      console.log(globalCustomer);
+    }, [globalCustomer]);
 
     return (
       <>
@@ -24,16 +27,18 @@ const CustomerProfile = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>{globalCustomer.id}</td>
-                <td>{globalCustomer.first_name}</td>
-                <td>{globalCustomer.last_name}</td>
-                <td>{globalCustomer.email}</td>
-                <td>{globalCustomer.active}</td>
-                <td>{globalCustomer.account_manager_id}</td>
-                <td>{globalCustomer.reason_for_joinging}</td>
-                <td>{globalCustomer.created_date}</td>
-              </tr>
+              {globalCustomer && (
+                <tr>
+                  <td>{globalCustomer.id}</td>
+                  <td>{globalCustomer.first_name}</td>
+                  <td>{globalCustomer.last_name}</td>
+                  <td>{globalCustomer.email}</td>
+                  <td>{globalCustomer.active}</td>
+                  <td>{globalCustomer.account_manager_id}</td>
+                  <td>{globalCustomer.reason_for_joining}</td>
+                  <td>{globalCustomer.created_date}</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
