@@ -1,18 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
 import http from "../../../utils/http-common";
+import CustomerAccounts from "../CustomerAccounts";
 import { CustomerContext } from "../../../utils/CustomerContext";
 
 const CustomerProfile = () => {
 
     const { globalCustomer } = useContext(CustomerContext);
 
-    useEffect(() => {
-      console.log(globalCustomer);
-    }, [globalCustomer]);
-
     return (
       <>
         <div className="container">
+          <h2>Customer:</h2>  
           <table className="customerTable">
             <thead>
               <tr>
@@ -41,6 +39,7 @@ const CustomerProfile = () => {
               )}
             </tbody>
           </table>
+          <CustomerAccounts/>
         </div>
       </>
     );

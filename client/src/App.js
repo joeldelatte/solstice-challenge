@@ -8,10 +8,6 @@ function App() {
 
   const [globalCustomer, setGlobalCustomer] = useState(null);
 
-  // useEffect(() => {
-  //   console.log(globalCustomer)
-  // }, [globalCustomer])
-
   return (
     <>
       <Router>
