@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
-import http from "../../../utils/http-common";
 import CustomerAccounts from "../CustomerAccounts";
 import { CustomerContext } from "../../../utils/CustomerContext";
+import "../../Main/main.css";
 
 const CustomerProfile = () => {
 

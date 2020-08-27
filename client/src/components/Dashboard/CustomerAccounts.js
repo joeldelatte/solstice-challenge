@@ -2,13 +2,24 @@ import React, { useContext, useState, useEffect, useLayoutEffect} from "react";
 import http from "../../utils/http-common";
 import Account from "../Main/Accounts/Account";
 import { CustomerContext } from "../../utils/CustomerContext";
+import "../Main/main.css";
 
 const CustomerAccounts = () => {
 
     const { globalCustomer } = useContext(CustomerContext);
-    const [accounts, setAccounts] = useState([]);
-    const [customerAccounts, setCustomerAccounts] = useState();
+    const [accounts, setAccounts] = useState([{
+      id: 0,
+      customer_id: 0,
+      address: "",
+      city: "",
+      state: "",
+      zip_code: "",
+      solar_farm_id: 0,
+      capacity_share: 0,
+      created_date: ""
+    }]);
     const [customerID, setCustomerID] = useState();
+
 
     function getAllAccounts() {
       http
@@ -28,15 +39,6 @@ const CustomerAccounts = () => {
         });
     }
 
-    // function setProfileAccounts() {
-    //     response.data.accounts.filter((element)=>{
-    //         if (element.id === customerID) {
-    //             setCustomerAccounts(element);
-    //         }
-    //     })
-    // }
-    
-    // const items = accounts.filter(item => item.customer_id.indexOf(globalCustomer.id) !== -1)
 
     useEffect(() => {
         (globalCustomer && setCustomerID(globalCustomer.id))
@@ -45,14 +47,16 @@ const CustomerAccounts = () => {
     
 
     useLayoutEffect(() => {
-      getAllAccounts();
+        setTimeout(() => {
+          getAllAccounts();
+        }, 550);
     }, [globalCustomer, customerID]);
 
     
 
     return (
       <>
-        <div>
+        <div className="container">
           <h2>Customer's Accounts:</h2>
           <table>
             <thead>
@@ -68,12 +72,23 @@ const CustomerAccounts = () => {
               </tr>
             </thead>
             <tbody>
+              {accounts.customer_id !== customerID && (
+                <Account
+                  customer_id={"0"}
+                  address={"address"}
+                  city={"city"}
+                  state={"state"}
+                  zip_code={"zip code"}
+                  solar_farm_id={"solar farm id"}
+                  capacity_share={"capacity share"}
+                  created_date={"created date"}
+                />
+              )}
               {accounts &&
                 accounts.map((account, index) => {
                   return (
                     <Account
                       key={index}
-                      // click={() => props.clicked(index)}
                       customer_id={account.customer_id}
                       address={account.address}
                       city={account.city}
