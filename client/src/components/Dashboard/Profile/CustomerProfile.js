@@ -10,7 +10,7 @@ const CustomerProfile = () => {
     return (
       <>
         <div className="container">
-          <h2>Customer:</h2>  
+          <h1>Customer:</h1>  
           <table className="customerTable">
             <thead>
               <tr>
