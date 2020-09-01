@@ -6,14 +6,12 @@ import "../main.css";
 
 const AllCustomers = () => {
 
-  const { globalCustomer, setGlobalCustomer } = useContext(CustomerContext);
+  const { setGlobalCustomer } = useContext(CustomerContext);
   const [customers, setCustomers] = useState([]);
 
-  //I need the customer data of the customer clicked on
   function click(index) {
     http.get("/customers")
       .then(function (response) {
-        // console.log(response.data.customers[index]);
         setGlobalCustomer(response.data.customers[index]);
       })
       .catch(function (err) {
@@ -24,7 +22,6 @@ const AllCustomers = () => {
   function getCustomers() {
     http.get("/customers")
       .then(function (response) {
-        // console.log(response.data.customers);
         setCustomers(response.data.customers);
       })
       .catch(function (err) {
@@ -34,7 +31,6 @@ const AllCustomers = () => {
 
   useEffect(()=>{
     getCustomers()
-    // console.log(globalCustomer);
   }, []);
 
     return (

@@ -3,7 +3,7 @@ import Account from "./Account";
 import http from "../../../utils/http-common";
 import "../main.css";
 
-const AllAccounts = (props) => {
+const AllAccounts = () => {
   const [accounts, setAccounts] = useState([]);
 
   function getAccounts() {
@@ -43,7 +43,6 @@ const AllAccounts = (props) => {
             return (
               <Account
                 key={index}
-                // click={() => props.clicked(index)}
                 customer_id={account.customer_id}
                 address={account.address}
                 city={account.city}

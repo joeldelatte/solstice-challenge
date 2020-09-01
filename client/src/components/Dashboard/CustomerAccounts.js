@@ -7,57 +7,32 @@ import "../Main/main.css";
 const CustomerAccounts = () => {
 
     const { globalCustomer } = useContext(CustomerContext);
-    const [accounts, setAccounts] = useState([{
-      id: 0,
-      customer_id: 0,
-      address: "",
-      city: "",
-      state: "",
-      zip_code: "",
-      solar_farm_id: 0,
-      capacity_share: 0,
-      created_date: ""
-    }]);
+    const [accounts, setAccounts] = useState([]);
     const [customerID, setCustomerID] = useState();
-
 
     function getAllAccounts() {
       http
         .get("/accounts")
         .then(function (response) {
           let data = response.data.accounts.filter((element)=>{
-            if(element.customer_id == customerID) {
-               return element;
-            }
-          }
-          );
-          console.log(data);
+            if(element.customer_id === customerID) {
+              return element;
+            } 
+          });
           setAccounts(data);
         })
         .catch(function (err) {
           console.log(err);
         });
+        
     }
 
-
-    useEffect(() => {
-        (globalCustomer && setCustomerID(globalCustomer.id))
-        console.log(customerID);        
-    }, [globalCustomer, customerID])
-    
-
-    useLayoutEffect(() => {
-        setTimeout(() => {
-          getAllAccounts();
-        }, 550);
-    }, [globalCustomer, customerID]);
-
-    
-
-    return (
-      <>
-        <div className="container">
-          <h2>Customer's Accounts:</h2>
+    const renderAccounts = () => {
+      if(!accounts.length) {
+        return <h4>...no accounts, yet!</h4>
+      } else {
+        return (
+          <>
           <table>
             <thead>
               <tr>
@@ -72,36 +47,49 @@ const CustomerAccounts = () => {
               </tr>
             </thead>
             <tbody>
-              {accounts.customer_id !== customerID && (
-                <Account
-                  customer_id={"0"}
-                  address={"address"}
-                  city={"city"}
-                  state={"state"}
-                  zip_code={"zip code"}
-                  solar_farm_id={"solar farm id"}
-                  capacity_share={"capacity share"}
-                  created_date={"created date"}
-                />
-              )}
               {accounts &&
                 accounts.map((account, index) => {
                   return (
-                    <Account
-                      key={index}
-                      customer_id={account.customer_id}
-                      address={account.address}
-                      city={account.city}
-                      state={account.state}
-                      zip_code={account.zip_code}
-                      solar_farm_id={account.solar_farm_id}
-                      capacity_share={account.capacity_share}
-                      created_date={account.created_date}
-                    />
+                      <Account
+                        key={index}
+                        customer_id={account.customer_id}
+                        address={account.address}
+                        city={account.city}
+                        state={account.state}
+                        zip_code={account.zip_code}
+                        solar_farm_id={account.solar_farm_id}
+                        capacity_share={account.capacity_share}
+                        created_date={account.created_date}
+                      />
+                    
                   );
                 })}
             </tbody>
           </table>
+          </>
+        )
+        
+      }
+    }
+
+    useEffect(() => {
+        (globalCustomer && setCustomerID(globalCustomer.id))        
+    }, [globalCustomer, setCustomerID])
+    
+
+    useLayoutEffect(() => {
+        setTimeout(() => {
+          getAllAccounts();
+        }, 550);
+    }, [customerID]);
+
+    
+
+    return (
+      <>
+        <div className="container">
+          <h2>Customer's Accounts:</h2>
+          {renderAccounts()}
         </div>
       </>
     );

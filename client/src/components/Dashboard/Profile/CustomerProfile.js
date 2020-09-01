@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import CustomerAccounts from "../CustomerAccounts";
 import { CustomerContext } from "../../../utils/CustomerContext";
 import "../../Main/main.css";

@@ -1,8 +1,7 @@
 const customersRoutes = (app, fs) => {
-  // variables
+
   const customersDataPath = "./data/customers.json";
 
-  // READ
   app.get("/customers", (req, res) => {
     fs.readFile(customersDataPath, "utf8", (err, data) => {
       if (err) {
